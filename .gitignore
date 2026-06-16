@@ -30,6 +30,9 @@ yarn-error.log*
 .env
 .env.production
 
+# PHP credentials — fill in directly on the server via cPanel File Manager
+api/credentials.php
+
 # FTP deploy sync state (contains server-side file hashes, not secrets,
 # but keep out of the repo to avoid leaking server structure)
 .ftp-deploy-sync-state.json
