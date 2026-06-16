@@ -136,7 +136,7 @@ GitHub Actions (ubuntu-latest)
 | `PS3 CURRENT` | `ps3_current` |
 | `FLOW` | `flow` |
 | `TOTAL FLOW MG` | `total_flow_mg` |
-| `PROCESS HOUR` | `process_hour` |
+| `PROCESS HOURS` | `process_hour` |
 
 ---
 

@@ -37,7 +37,7 @@ $base = "
         `PS3 CURRENT`    AS ps3_current,
         `FLOW`           AS flow,
         `TOTAL FLOW MG`  AS total_flow_mg,
-        `PROCESS HOUR`   AS process_hour
+        `PROCESS HOURS`  AS process_hour
     FROM `$TABLE`
 ";
 
