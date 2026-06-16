@@ -13,6 +13,7 @@ export function useDashboard() {
     refetchInterval: POLL_INTERVAL_MS,
     refetchIntervalInBackground: false,
     staleTime: POLL_INTERVAL_MS,
+    placeholderData: (prev) => prev, // keep last datapoint visible until new data arrives
     retry: 2,
   });
 }
