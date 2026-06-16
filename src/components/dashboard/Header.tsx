@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface HeaderProps {
@@ -12,10 +13,16 @@ export function Header({ isProcessOn, isDataDelayed }: HeaderProps) {
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo + Title */}
+          {/* Village logo + Title */}
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center overflow-hidden flex-shrink-0">
-              <span className="text-lg">🦫</span>
+            <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
+              <Image
+                src="/images/village.jpg"
+                alt="Village of Indiantown"
+                width={36}
+                height={36}
+                className="w-full h-full object-cover"
+              />
             </div>
             <span className="text-xl font-semibold text-gray-900">
               Beaver Project - 2304
@@ -59,9 +66,15 @@ export function Header({ isProcessOn, isDataDelayed }: HeaderProps) {
               </div>
             </div>
 
-            {/* Beaver logo avatar */}
-            <div className="w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center overflow-hidden flex-shrink-0">
-              <span className="text-base">🌊</span>
+            {/* Beaver Ecoworks logo */}
+            <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
+              <Image
+                src="/images/beaver-logo.png"
+                alt="Beaver Ecoworks"
+                width={36}
+                height={36}
+                className="w-full h-full object-contain"
+              />
             </div>
           </div>
         </div>
