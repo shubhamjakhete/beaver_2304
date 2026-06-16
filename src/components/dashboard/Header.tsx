@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface HeaderProps {
@@ -16,11 +15,10 @@ export function Header({ isProcessOn, isDataDelayed }: HeaderProps) {
           {/* Village logo + Title */}
           <div className="flex items-center space-x-3">
             <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
-              <Image
-                src="/images/village.jpg"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="images/village.jpg"
                 alt="Village of Indiantown"
-                width={36}
-                height={36}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -68,11 +66,10 @@ export function Header({ isProcessOn, isDataDelayed }: HeaderProps) {
 
             {/* Beaver Ecoworks logo */}
             <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
-              <Image
-                src="/images/beaver-logo.png"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="images/beaver-logo.png"
                 alt="Beaver Ecoworks"
-                width={36}
-                height={36}
                 className="w-full h-full object-contain"
               />
             </div>
