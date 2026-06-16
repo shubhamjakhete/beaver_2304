@@ -36,7 +36,7 @@ jobs:
           username: ${{ secrets.FTPS_USER }}
           password: ${{ secrets.FTPS_PASS }}
           local-dir: ./out/
-          server-dir: /public_html/projects/2304/
+          server-dir: /projects/2304/
           protocol: ftps
           # Only upload files that changed since last deploy (uses a .ftp-deploy-sync-state.json)
           dangerous-clean-slate: false
