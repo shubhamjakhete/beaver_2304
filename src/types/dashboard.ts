@@ -39,8 +39,14 @@ export interface DashboardSnapshot {
   series: SeriesData;
 }
 
+/** Sensors that support sensor_history.php weekly/monthly/yearly. */
 export type SensorKey = 'orp' | 'ph' | 'do_val' | 'tds' | 'pt100_1' | 'pt100_2';
+
+/** Extra series keys available only from data.php 12h buckets. */
+export type SeriesKey = SensorKey | 'tank_level' | 'flow' | 'total_flow_mg' | 'process_hour';
+
 export type HistoryPeriod = 'weekly' | 'monthly' | 'yearly';
+export type TrendsPeriod = '12h' | HistoryPeriod;
 
 export interface SensorHistoryResponse {
   success: boolean;
@@ -55,55 +61,53 @@ export interface SensorHistoryResponse {
 }
 
 export interface SensorMeta {
-  key: SensorKey;
+  key: SeriesKey;
   label: string;
   unit: string;
-  color: string;
-  /** Recharts area fill (hex with opacity appended or rgba) */
-  fill: string;
+  decimals: number;
 }
 
-export const SENSOR_META: Record<SensorKey, SensorMeta> = {
-  ph: {
-    key: 'ph',
-    label: 'pH Level',
-    unit: '',
-    color: '#10b981',
-    fill: '#10b98120',
-  },
-  tds: {
-    key: 'tds',
-    label: 'TDS',
-    unit: 'ppm',
-    color: '#f59e0b',
-    fill: '#f59e0b20',
-  },
-  orp: {
-    key: 'orp',
-    label: 'ORP',
-    unit: 'mV',
-    color: '#8b5cf6',
-    fill: '#8b5cf620',
-  },
-  do_val: {
-    key: 'do_val',
-    label: 'Dissolved Oxygen',
-    unit: 'mg/L',
-    color: '#06b6d4',
-    fill: '#06b6d420',
-  },
-  pt100_1: {
-    key: 'pt100_1',
-    label: 'PT1',
-    unit: '°PSI',
-    color: '#ef4444',
-    fill: '#ef444420',
-  },
-  pt100_2: {
-    key: 'pt100_2',
-    label: 'PT2',
-    unit: '°PSI',
-    color: '#10b981',
-    fill: '#10b98120',
-  },
+export const HISTORY_SENSORS: SensorKey[] = [
+  'ph',
+  'orp',
+  'tds',
+  'do_val',
+  'pt100_1',
+  'pt100_2',
+];
+
+export const TREND_12H_SENSORS: SeriesKey[] = [
+  'ph',
+  'orp',
+  'tds',
+  'do_val',
+  'pt100_1',
+  'pt100_2',
+  'tank_level',
+  'flow',
+  'total_flow_mg',
+];
+
+export const SENSOR_META: Record<SeriesKey, SensorMeta> = {
+  ph: { key: 'ph', label: 'pH', unit: '', decimals: 2 },
+  orp: { key: 'orp', label: 'ORP', unit: 'mV', decimals: 0 },
+  tds: { key: 'tds', label: 'TDS', unit: 'ppm', decimals: 0 },
+  do_val: { key: 'do_val', label: 'DO', unit: 'mg/L', decimals: 2 },
+  pt100_1: { key: 'pt100_1', label: 'PT1', unit: 'PSI', decimals: 1 },
+  pt100_2: { key: 'pt100_2', label: 'PT2', unit: 'PSI', decimals: 1 },
+  tank_level: { key: 'tank_level', label: 'Tank Level', unit: '%', decimals: 1 },
+  flow: { key: 'flow', label: 'Flow', unit: 'GPM', decimals: 1 },
+  total_flow_mg: { key: 'total_flow_mg', label: 'Total Flow', unit: 'MG', decimals: 1 },
+  process_hour: { key: 'process_hour', label: 'Process Hours', unit: 'h', decimals: 2 },
 };
+
+/**
+ * LIVE is browser-clock-dependent (unlike 2403's server-side is_live).
+ * Treat data as live when created_at is within the last 600 seconds.
+ */
+export function computeIsLive(createdAt: string | null | undefined): boolean {
+  if (!createdAt) return false;
+  const ts = Date.parse(createdAt.replace(' ', 'T'));
+  if (Number.isNaN(ts)) return false;
+  return Date.now() - ts < 600_000;
+}
