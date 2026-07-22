@@ -24,23 +24,23 @@ export function ElectricalPanelTile({
       >
         {panel} Panel
       </div>
-      <div className="grid grid-cols-2 gap-3">
-        <div>
+      <div className="flex items-end justify-between gap-4">
+        <div className="min-w-0">
           <div className="text-[.58rem] tracking-[.06em] uppercase" style={{ color: 'var(--text-mid)' }}>
             Voltage
           </div>
-          <div className="font-mono text-[1.15rem] font-semibold" style={{ color: 'var(--text-hi)' }}>
+          <div className="font-mono text-[1.15rem] font-semibold tabular-nums" style={{ color: 'var(--text-hi)' }}>
             {fmt(voltage, 1)}
             <span className="text-[.62rem] ml-1 font-sans" style={{ color: 'var(--text-mid)' }}>
               V
             </span>
           </div>
         </div>
-        <div>
+        <div className="text-right flex-shrink-0">
           <div className="text-[.58rem] tracking-[.06em] uppercase" style={{ color: 'var(--text-mid)' }}>
             Current
           </div>
-          <div className="font-mono text-[1.15rem] font-semibold" style={{ color: 'var(--text-hi)' }}>
+          <div className="font-mono text-[1.15rem] font-semibold tabular-nums" style={{ color: 'var(--text-hi)' }}>
             {fmt(current, 2)}
             <span className="text-[.62rem] ml-1 font-sans" style={{ color: 'var(--text-mid)' }}>
               A
