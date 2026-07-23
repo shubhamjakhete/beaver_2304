@@ -103,6 +103,7 @@ export function TitleBar() {
           width={48}
           height={48}
           className="rounded flex-shrink-0 object-contain"
+          style={{ background: '#ffffff', padding: '2px' }}
           onError={(e) => {
             (e.target as HTMLImageElement).style.display = 'none';
           }}
